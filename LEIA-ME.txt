@@ -1,0 +1,9 @@
+Utilização do Banco de Dados MySql com o Framework - Entity Framework 6
+- Na guia Solution Explorer há no canto superior direito um ícone do MySql Website Configuration.
+- Neste ícone é possível configurar o MySql para rodar com o Entity Framework 6.
+- Após a criação do banco Checklist de acordo com o script em anexo, deve-se adicionar na pasta Model do projeto um 'ADO.Net Entity Data Model'
+- Lembrar de alterar o usuário e senha do banco de dados no arquivo Web.config na String de Conexão.
+- Favor dar um Rebuild no projeto para verificar que não haja nenhum imprevisto.
+- Ao rodar o projeto, na indicação do estado da tarefa se parar o mouse em cima do linke 'Em Andamento' ou 'Pronta' sera exibido uma mensagem que avisa sobre a alteração do estado.
+
+O projeto esta salvo no link <http://projectorion-org.umbler.net/> para testes
