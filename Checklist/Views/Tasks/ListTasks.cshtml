@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Checklist.Models.tasks>
+
+@{
+    ViewBag.Title = "ListTasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var idTask = "idTask";
+    var idDescription = "idDescription";
+    var idTaskDescription = "idTaskDescription";
+    var idTaskStatus = "idTaskStatus";
+    var btnTaskSave = "btnTaskSave";
+}
+
+<h2 class="control-label"><img src="~/Images/new-task.png" style="width:40px; height:40px;" /><b><u>Nova Tarefa</u></b></h2>
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <label class="control-label col-md-2">Descrição:</label>
+        <div class="col-md-10">
+            <textarea id="@idTaskDescription" class="form-control" rows="5" style="width:100%;"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="@btnTaskSave" value="Adicionar" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+
+<h2 class="control-label"><b><u><img src="~/Images/list-tasks.png" style="width:40px; height:40px" />Lista de Tarefas</u></b></h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <h3>Número</h3>
+        </th>
+        <th>
+            <h3>Descrição</h3>
+        </th>
+        <th>
+            <h3>Estado</h3>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <label id="@idTask">@Html.DisplayFor(modelItem => item.IdTask)</label>
+            </td>
+            <td>
+                @if (item.Estate == true)
+                {
+                    <label id="@idDescription">@Html.DisplayFor(modelItem => item.Description)</label>
+                }
+                else
+                {
+                    <label id="@idDescription"><strike>@Html.DisplayFor(modelItem => item.Description)</strike></label>
+                }
+            </td>
+            <td>
+                @if (item.Estate == true)
+                {
+                    <a href="javascript:changeTask(@item.IdTask);" id="@idTaskStatus" style="color:indianred;  cursor:pointer;" title="Click aqui para mudar o status." class="andamento">Em Andamento...</a>
+                }
+                else
+                {
+                    <a href="javascript:changeTask(@item.IdTask);" id="@idTaskStatus" style="color:lightgreen; cursor:pointer;" title="Click aqui para mudar o status." class="pronta">Pronta</a>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+
+    //Variáveis de acesso as actions [URL]
+    var Url = {
+        NewTask: "@Url.Action("NewTask", "Tasks")",
+        EditTask: "@Url.Action("EditTask", "Tasks")"
+    }
+
+    //Variáveis de identificação para utilização no JS
+    var GenerallSettings = {
+        Id: "#@idTask",
+        Description: "#@idTaskDescription",
+        DescriptionList: "#@idDescription",
+        Estate: "#@idTaskStatus",
+        BtnSave: "#@btnTaskSave"
+    }
+
+</script>
+<script src="~/Scripts/Tasks/Tasks.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
